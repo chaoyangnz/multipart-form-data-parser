@@ -4,26 +4,17 @@
 [![Node.js version][nodejs-badge]][nodejs]
 [![Build Status - GitHub Actions][gha-badge]][gha-ci]
 
-# node-library-template
+# multipart-form-data-parser
 
-👩🏻‍💻 Developer Ready: An easy-to-start template to speed up building your NodeJS library.
-
-🏃🏽 Instant Value: All basic tools included and configured:
-
-- [TypeScript][typescript] [4.2][typescript-4-2]
-- [ESLint][eslint] with some initial rules recommendation
-- [Jest][jest] for fast unit testing and code coverage
-- Type definitions for Node.js and Jest
-- [Prettier][prettier] to enforce consistent code style
-- NPM [scripts](#available-scripts) for common operations: test, release
-- Simple example of TypeScript code and unit test
-- .editorconfig for consistent file format
-- Environments management via [Volta][volta]
-- Example configuration for [GitHub Actions][gh-actions]
+A zero-dependency multipart data parser.
 
 ## Getting Started
 
-Make sure to be used with the latest Active LTS release version of [Node.js][nodejs].
+```typescript
+import {parser} from 'multipart-form-data-parser'
+
+parse(Buffer.from('...'), 'boundary')
+```
 
 ### Use as a repository template
 
@@ -34,8 +25,8 @@ Click the **[Use template][repo-template-action]** link (or the green button). N
 To clone the repository use the following commands:
 
 ```sh
-git clone https://github.com/chaoyangnz/node-library-template
-cd node-library-template
+git clone https://github.com/chaoyangnz/multipart-form-data-parser
+cd multipart-form-data-parser
 npm install
 ```
 
@@ -44,8 +35,8 @@ npm install
 Download and unzip current `master` branch or one of tags:
 
 ```sh
-wget https://github.com/chaoyangnz/node-library-template/archive/master.zip -O node-library-template.zip
-unzip node-library-template.zip && rm node-library-template.zip
+wget https://github.com/chaoyangnz/multipart-form-data-parser/archive/master.zip -O multipart-form-data-parser.zip
+unzip multipart-form-data-parser.zip && rm multipart-form-data-parser.zip
 ```
 
 ## Available Scripts
@@ -60,17 +51,17 @@ unzip node-library-template.zip && rm node-library-template.zip
 
 ## License
 
-Licensed under the MIT. See the [LICENSE](https://github.com/chaoyangnz/node-library-template/blob/master/LICENSE) file for details.
+Licensed under the MIT. See the [LICENSE](https://github.com/chaoyangnz/multipart-form-data-parser/blob/master/LICENSE) file for details.
 
 [ts-badge]: https://img.shields.io/badge/TypeScript-4.2-blue.svg
 [nodejs-badge]: https://img.shields.io/badge/Node.js->=%2012.20-blue.svg
 [nodejs]: https://nodejs.org/dist/latest-v14.x/docs/api/
-[gha-badge]: https://github.com/chaoyangnz/node-library-template/workflows/build/badge.svg
-[gha-ci]: https://github.com/chaoyangnz/node-library-template/actions
+[gha-badge]: https://github.com/chaoyangnz/multipart-form-data-parser/workflows/build/badge.svg
+[gha-ci]: https://github.com/chaoyangnz/multipart-form-data-parser/actions
 [typescript]: https://www.typescriptlang.org/
 [typescript-4-2]: https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-2.html
 [license-badge]: https://img.shields.io/badge/license-MIT-blue.svg
-[license]: https://github.com/chaoyangnz/node-library-template/blob/master/LICENSE
+[license]: https://github.com/chaoyangnz/multipart-form-data-parser/blob/master/LICENSE
 [sponsor-badge]: https://img.shields.io/badge/♥-Sponsor-fc0fb5.svg
 [sponsor]: https://github.com/sponsors/chaoyangnz
 [jest]: https://facebook.github.io/jest/
@@ -81,6 +72,6 @@ Licensed under the MIT. See the [LICENSE](https://github.com/chaoyangnz/node-lib
 [volta-tomdale]: https://twitter.com/tomdale/status/1162017336699838467?s=20
 [gh-actions]: https://github.com/features/actions
 [travis]: https://travis-ci.org
-[repo-template-action]: https://github.com/chaoyangnz/node-library-template/generate
-[npm-badge]: https://img.shields.io/npm/v/node-library-template
-[npm]: https://www.npmjs.com/package/node-library-template
+[repo-template-action]: https://github.com/chaoyangnz/multipart-form-data-parser/generate
+[npm-badge]: https://img.shields.io/npm/v/multipart-form-data-parser
+[npm]: https://www.npmjs.com/package/multipart-form-data-parser

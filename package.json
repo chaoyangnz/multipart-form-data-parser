@@ -1,12 +1,12 @@
 {
-  "name": "node-library-template",
+  "name": "multipart-form-data-parser",
   "version": "0.0.1",
-  "description": "node-library-template",
+  "description": "multipart-form-data-parser",
   "author": "Chao Yang <chao@yang.to>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/chaoyangnz/node-library-template"
+    "url": "https://github.com/chaoyangnz/multipart-form-data-parser"
   },
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -22,7 +22,7 @@
     "prerelease": "npm run build",
     "release": "npm login && bump --tag && npm publish",
     "postrelease": "git push && git push --tags",
-    "postinstall": "ts-node tools/rename.ts"
+    "postinstall": ""
   },
   "publishConfig": {
     "access": "public"
@@ -42,6 +42,7 @@
     "eslint": "~7.21.0",
     "eslint-config-prettier": "~8.1.0",
     "eslint-plugin-jest": "~24.1.5",
+    "form-data": "^4.0.0",
     "jest": "~26.6.3",
     "prettier": "~2.2.1",
     "prompts": "^2.4.1",
