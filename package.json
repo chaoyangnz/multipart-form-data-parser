@@ -1,6 +1,6 @@
 {
   "name": "multipart-form-data-parser",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "multipart-form-data-parser",
   "author": "Chao Yang <chao@yang.to>",
   "license": "MIT",
