@@ -47,7 +47,7 @@ describe('multipart parser', () => {
     const multipart = parse(body, boundary);
     console.log(multipart)
 
-    console.log(body, prettyPrint(body));
+    console.log(body, prettyPrint(body, undefined, undefined, 1024 * 21));
     // expect(prettyPrint(body)).toEqual(body.toString())
   })
 });

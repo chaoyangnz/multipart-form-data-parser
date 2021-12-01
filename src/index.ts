@@ -1,3 +1,5 @@
+import * as crypto from 'crypto';
+
 function split(buffer: Buffer, delimiter: Buffer): Buffer[] {
   const arr = [];
   let cur = 0;
@@ -35,28 +37,60 @@ const wellKnownTextualContentTypes = [
   'application/json',
 ];
 
+/**
+ * pretty print a multipart/form-data payload
+ *
+ * @param body
+ * @param boundary
+ * @param textualContentTypes
+ * @param maxSizeToShowFullBinaryPayload the size limit to decide if show the full binary payload, show a summary when exceeded
+ */
 export function prettyPrint(
   body: Buffer,
   boundary?: string,
   textualContentTypes?: string[],
+  maxSizeToShowFullBinaryPayload?: number,
+): string {
+  try {
+    return doPrettyPrint(body, boundary, textualContentTypes, maxSizeToShowFullBinaryPayload)
+  } catch (e) {
+    console.warn('Error occurred when pretty print multipart form data', e)
+    return ''
+  }
+}
+
+
+function doPrettyPrint(
+  body: Buffer,
+  boundary?: string,
+  textualContentTypes?: string[],
+  maxSizeToShowFullBinaryPayload?: number,
 ): string {
   const multipart = parse(body, boundary);
   if (multipart === empty) return '';
+
+  maxSizeToShowFullBinaryPayload ||= 0
+  textualContentTypes ||= wellKnownTextualContentTypes;
 
   const startLine = `--${multipart.boundary}`;
   const endLine = `${lineFeed}--${multipart.boundary}--`;
   return multipart.parts
     .map((part) => {
-      textualContentTypes ||= [];
-      textualContentTypes.push(...wellKnownTextualContentTypes);
       const headers = part.headers.toString();
-      const data = part.data.toString(
-        textualContentTypes.includes(
-          (part.contentType || 'text/plain').split(';')[0].trim(),
-        )
-          ? 'utf8'
-          : 'base64',
+      const isTextualData = textualContentTypes.includes(
+        (part.contentType || 'text/plain').split(';')[0].trim(),
       );
+      const data = isTextualData
+        ? part.data.toString('utf8')
+        : part.data.length >= maxSizeToShowFullBinaryPayload
+        ? part.data.toString('base64')
+        : `<${
+            part.data.length
+          } octets>: sha256 ${crypto
+            .createHash('sha256')
+            .update(part.data)
+            .digest('hex')}`;
+
       return [startLine, headers, '', data].join(lineFeed.toString());
     })
     .join(lineFeed.toString())
@@ -90,11 +124,23 @@ function trim(buffer: Buffer, feed: Buffer) {
 
 const lineFeed = Buffer.of(0x0d, 0x0a);
 const doubleLineFeed = Buffer.of(0x0d, 0x0a, 0x0d, 0x0a);
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-const empty: Multipart = {};
+
+const empty: Multipart = {
+  boundary: undefined,
+  parts: []
+};
 
 export function parse(body: Buffer, boundary?: string): Multipart {
+  try {
+    return doParse(body, boundary)
+  } catch (e) {
+    console.warn('Error occurred when parse multipart form data', e)
+    return empty
+  }
+}
+
+
+function doParse(body: Buffer, boundary?: string): Multipart {
   if (body.length === 0) {
     return empty;
   }
