@@ -83,13 +83,13 @@ function doPrettyPrint(
       const data = isTextualData
         ? part.data.toString('utf8')
         : part.data.length >= maxSizeToShowFullBinaryPayload
-        ? part.data.toString('base64')
-        : `<${
+        ? `<${
             part.data.length
           } octets>: sha256 ${crypto
             .createHash('sha256')
             .update(part.data)
-            .digest('hex')}`;
+            .digest('hex')}`
+        : part.data.toString('base64');
 
       return [startLine, headers, '', data].join(lineFeed.toString());
     })

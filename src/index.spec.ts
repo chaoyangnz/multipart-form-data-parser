@@ -47,6 +47,8 @@ describe('multipart parser', () => {
     const multipart = parse(body, boundary);
     console.log(multipart)
 
+    // this example image 20.5k
+    console.log(body, prettyPrint(body, undefined, undefined, 1024 * 20));
     console.log(body, prettyPrint(body, undefined, undefined, 1024 * 21));
     // expect(prettyPrint(body)).toEqual(body.toString())
   })

@@ -30,7 +30,7 @@
   "files": [
     "lib/**/*"
   ],
-  "dependencies": {
+  "peerDependencies": {
     "tslib": "~2.1.0"
   },
   "devDependencies": {
